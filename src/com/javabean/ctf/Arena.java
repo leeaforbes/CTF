@@ -15,7 +15,8 @@ import org.bukkit.plugin.Plugin;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class Arena {
+public class Arena{
+	//yet another git test
 	private String arenaName;
 	private Location[] bounds = new Location[2];
 	

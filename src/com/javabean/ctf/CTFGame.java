@@ -141,7 +141,7 @@ public class CTFGame{
 			
 //			player.getInventory().addItem(getItemStackOPSWORD());
 			
-			player.getInventory().addItem(new ItemStack(Material.WOODEN_SWORD, 1));
+			player.getInventory().addItem(new ItemStack(Material.IRON_SWORD, 1));
 			player.getInventory().addItem(new ItemStack(Material.BOW, 1));
 			player.getInventory().addItem(new ItemStack(Material.ARROW, 5));
 			
@@ -264,6 +264,8 @@ public class CTFGame{
 		teamData.get(team.getName()).addPlayer(player);
 		
 		player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 1.0f);
+		
+		CTFGameManager.playersInArena.put(player.getName(), arena);
 	}
 	
 	public void playerLeave(Player player){
@@ -276,6 +278,8 @@ public class CTFGame{
 		player.teleport(playerData.get(player.getName()).getLocationBeforeGame());
 		teamData.get(teamName).removePlayer(player);
 		playerData.remove(player.getName());
+		
+		CTFGameManager.playersInArena.remove(player.getName());
 	}
 	
 	public boolean isPlayerInGame(Player player){

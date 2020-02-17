@@ -19,6 +19,9 @@ public class CTFGameManager implements ActionListener{
 	//map with arena name key, CTF game value to ensure only one game per arena
 	private HashMap<String, CTFGame> games = new HashMap<String, CTFGame>();
 	
+	//player name, Arena
+	public static HashMap<String, Arena> playersInArena = new HashMap<String, Arena>();
+	
 	//the plugin
 	Plugin plugin;
 	
@@ -88,14 +91,8 @@ public class CTFGameManager implements ActionListener{
 	
 	//returns arena of game player is in, otherwise null
 	public Arena getPlayerGameArena(Player player){
-		//check each arena with a game going on
-		for(String arenaName : games.keySet()){
-			if(games.get(arenaName).isPlayerInGame(player)){
-				//player found in a game
-				return games.get(arenaName).getArena();
-			}
-		}
-		return null;
+		//will be null if not in a game
+		return playersInArena.get(player.getName());
 	}
 	
 	public PlayerGameData getPlayerGameData(Player player, Arena arena){

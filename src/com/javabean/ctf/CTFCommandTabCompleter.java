@@ -46,7 +46,9 @@ public class CTFCommandTabCompleter implements TabCompleter{
 						Arena playerArena = gameManager.getPlayerGameArena(player);
 						if(playerArena != null){
 							for(String teamName : playerArena.getTeams().keySet()){
-								options.add(teamName);
+								if(teamName.startsWith(args[1])){
+									options.add(teamName);
+								}
 							}
 						}
 					}
@@ -128,12 +130,16 @@ public class CTFCommandTabCompleter implements TabCompleter{
 							}
 							else if(args[1].equalsIgnoreCase("createsign") && args.length == 3){
 								for(String arenaName : arenaMap.keySet()){
-									options.add(arenaName);
+									if(arenaName.startsWith(args[2])){
+										options.add(arenaName);
+									}
 								}
 							}
 							else if(args[1].equalsIgnoreCase("info") && args.length == 3){
 								for(String arenaName : arenaMap.keySet()){
-									options.add(arenaName);
+									if(arenaName.startsWith(args[2])){
+										options.add(arenaName);
+									}
 								}
 							}
 							else if(args[1].equalsIgnoreCase("removeteam")){

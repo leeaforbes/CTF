@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -17,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -108,6 +111,34 @@ public class CTFListener implements Listener{
 		if(event.getHand() == EquipmentSlot.HAND && (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_BLOCK)){
 			flagClickEvent(event);
 			signClickEvent(event);
+		}
+	}
+	
+	@EventHandler
+	public void onBreakBlock(BlockBreakEvent event){
+		if(gameManager.getPlayerGameArena(event.getPlayer()) != null){
+			//if player is not OP
+			if(!event.getPlayer().isOp()){
+				event.setCancelled(true);
+			}
+			//player not in creative mode
+			else if(event.getPlayer().getGameMode() != GameMode.CREATIVE){
+				event.setCancelled(true);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event){
+		if(gameManager.getPlayerGameArena(event.getPlayer()) != null){
+			//if player is not OP
+			if(!event.getPlayer().isOp()){
+				event.setCancelled(true);
+			}
+			//player not in creative mode
+			else if(event.getPlayer().getGameMode() != GameMode.CREATIVE){
+				event.setCancelled(true);
+			}
 		}
 	}
 	
